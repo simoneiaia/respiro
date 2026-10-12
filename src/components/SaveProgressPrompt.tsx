@@ -37,7 +37,7 @@ export function SaveProgressPrompt({ saved }: { saved: boolean }) {
         </p>
         <div className="flex flex-wrap gap-2 pt-1">
           <Link href="/accedi" className="btn-primary">
-            Crea account / Accedi
+            Accedi con Google
           </Link>
           <Link href="/come-funziona" className="btn-ghost">
             Come funziona

@@ -39,9 +39,8 @@ npm run retention:apply        # purge assessment/account scaduti
 
 ## Auth
 
-- Email/password
-- Google (attivo sul progetto Firebase)
-- Apple / Microsoft / GitHub: codice UI pronto; vanno abilitati in Firebase Console con le chiavi dei rispettivi developer account
+- Solo Google Sign-In (Firebase Auth)
+- Self-check anonimo sempre disponibile senza account
 
 ## Privacy
 
