@@ -1,0 +1,392 @@
+{
+  "slug": "benessere-check-v3",
+  "title": "Self-check benessere psicologico",
+  "version": "3.0.0",
+  "description": "Questionario orientativo non diagnostico con domande originali per Respiro. Non deriva da strumenti clinici protetti.",
+  "timeframe": "Negli ultimi 14 giorni",
+  "scale": {
+    "min": 0,
+    "max": 4,
+    "labels": [
+      { "value": 0, "label": "Mai" },
+      { "value": 1, "label": "Raramente" },
+      { "value": 2, "label": "A volte" },
+      { "value": 3, "label": "Spesso" },
+      { "value": 4, "label": "Sempre o quasi sempre" }
+    ]
+  },
+  "areas": [
+    { "key": "wellbeing", "label": "Benessere" },
+    { "key": "symptoms", "label": "Sintomi percepiti" },
+    { "key": "functioning", "label": "Funzionamento quotidiano" },
+    { "key": "risk", "label": "Segnali di rischio" }
+  ],
+  "questions": [
+    {
+      "id": "q001",
+      "text": "Ho avuto momenti in cui mi sentivo tranquillo/a dentro.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q002",
+      "text": "Mi sono sentito/a capace di affrontare ciò che la giornata mi ha chiesto.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q003",
+      "text": "Ho percepito senso e direzione nelle mie scelte.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q004",
+      "text": "Ho trovato soddisfazione nelle attività che ho svolto.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q005",
+      "text": "Mi sono sentito/a accettato/a da me stesso/a.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q006",
+      "text": "Ho provato calore e vicinanza nelle relazioni che contano per me.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q007",
+      "text": "Ho avuto energie sufficienti per affrontare la giornata.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q008",
+      "text": "Mi sono sentito/a stabile emotivamente, senza alti e bassi eccessivi.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q009",
+      "text": "Ho guardato al futuro con fiducia o curiosità.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q010",
+      "text": "Ho provato gratitudine o contentezza per qualcosa nella mia vita.",
+      "area": "wellbeing",
+      "reverse_scored": true,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q011",
+      "text": "Ho percepito un senso di agitazione o irrequietezza interiore.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q012",
+      "text": "La mente mi ha sommerso/a con pensieri che facevo fatica a gestire.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q013",
+      "text": "Il sonno non mi ha ridato le forze di cui avevo bisogno.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q014",
+      "text": "Ho avvertito un calo di umore o di entusiasmo rispetto al solito.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q015",
+      "text": "Piccole cose mi hanno irritato/a più del previsto.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q016",
+      "text": "Ho sentito il corpo in tensione (collo, spalle, stomaco) senza un motivo fisico evidente.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q017",
+      "text": "Ho avuto difficoltà a riposare la mente anche quando avevo un momento libero.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q018",
+      "text": "Mi sono sentito/a svuotato/a o scarico/a anche senza sforzo particolare.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q019",
+      "text": "Ho avvertito fastidio o disagio in situazioni sociali abituali.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q020",
+      "text": "Ho avuto la sensazione di non riuscire a staccare dalle preoccupazioni.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q021",
+      "text": "Ho percepito un senso di paura o allarme anche senza un pericolo concreto.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q022",
+      "text": "Ho notato cambiamenti nell'appetito o nel modo di mangiare rispetto al solito.",
+      "area": "symptoms",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q023",
+      "text": "Ho fatto fatica a tenere la concentrazione su quello che stavo facendo.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q024",
+      "text": "Ho evitato attività, incontri o situazioni che di solito affronto senza problemi.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q025",
+      "text": "Ho lasciato incompleti compiti o impegni che avrei voluto portare a termine.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q026",
+      "text": "Ho trascurato le mie esigenze di base (sonno, alimentazione, igiene, movimento).",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q027",
+      "text": "I rapporti con familiari, amici o colleghi ne hanno risentito.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q028",
+      "text": "Impegni e responsabilità mi sono sembrati eccessivi rispetto a ciò che potevo reggere.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q029",
+      "text": "Ho preso decisioni quotidiane con meno lucidità del solito.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q030",
+      "text": "Ho fatto fatica a dedicare tempo a ciò che considero importante per me.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q031",
+      "text": "La mia routine quotidiana è diventata irregolare o difficile da mantenere.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q032",
+      "text": "Ho rimandato compiti o problemi pratici più spesso del solito.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q033",
+      "text": "Ho fatto fatica a chiedere aiuto quando ne avrei avuto bisogno.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q034",
+      "text": "Ho svolto le attività di lavoro, studio o casa con meno efficacia del solito.",
+      "area": "functioning",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": false,
+      "risk_trigger_values": []
+    },
+    {
+      "id": "q035",
+      "text": "Ho pensato che chi mi sta intorno starebbe meglio senza di me.",
+      "area": "risk",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": true,
+      "risk_trigger_values": [1, 2, 3, 4]
+    },
+    {
+      "id": "q036",
+      "text": "Ho avuto pensieri di farmi del male.",
+      "area": "risk",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": true,
+      "risk_trigger_values": [1, 2, 3, 4]
+    },
+    {
+      "id": "q037",
+      "text": "Ho avuto pensieri che la vita non valga la pena di essere vissuta.",
+      "area": "risk",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": true,
+      "risk_trigger_values": [1, 2, 3, 4]
+    },
+    {
+      "id": "q038",
+      "text": "Mi sono sentito/a un peso per le persone vicine a me.",
+      "area": "risk",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": true,
+      "risk_trigger_values": [2, 3, 4]
+    },
+    {
+      "id": "q039",
+      "text": "Ho desiderato non svegliarmi la mattina dopo.",
+      "area": "risk",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": true,
+      "risk_trigger_values": [1, 2, 3, 4]
+    },
+    {
+      "id": "q040",
+      "text": "Ho pensato seriamente di farmi del male.",
+      "area": "risk",
+      "reverse_scored": false,
+      "required": true,
+      "is_risk_item": true,
+      "risk_trigger_values": [1, 2, 3, 4]
+    }
+  ],
+  "bands": [
+    { "key": "low", "min_mean": 0, "max_mean": 0.99, "label": "Segnali contenuti" },
+    { "key": "moderate", "min_mean": 1, "max_mean": 1.99, "label": "Alcuni segnali da osservare" },
+    { "key": "high", "min_mean": 2, "max_mean": 2.99, "label": "Disagio percepito significativo" },
+    { "key": "very_high", "min_mean": 3, "max_mean": 4, "label": "Disagio percepito intenso" }
+  ]
+}
