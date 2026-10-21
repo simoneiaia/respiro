@@ -17,7 +17,7 @@ export default function PrivacyPage() {
       <div>
         <h1 className="text-2xl font-semibold">Informativa privacy</h1>
         <p className="mt-1 text-sm text-brand-600">
-          Versione {LEGAL.privacyVersion} · In vigore dal {LEGAL.effectiveDate}
+          In vigore dal {LEGAL.effectiveDate}
         </p>
         <p className="mt-2 text-sm text-brand-700">
           Informativa resa ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679 (GDPR) per

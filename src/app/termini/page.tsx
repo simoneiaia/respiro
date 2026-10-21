@@ -10,7 +10,7 @@ export default function TerminiPage() {
       <div>
         <h1 className="text-2xl font-semibold">Termini d&apos;uso</h1>
         <p className="mt-1 text-sm text-brand-600">
-          Versione {LEGAL.privacyVersion} · In vigore dal {LEGAL.effectiveDate}
+          In vigore dal {LEGAL.effectiveDate}
         </p>
       </div>
 

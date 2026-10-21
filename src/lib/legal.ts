@@ -2,6 +2,7 @@ import { APP_NAME, APP_URL, OWNER } from "./brand";
 
 /** Riferimenti legali centralizzati (GDPR). Usati in privacy, termini e gestione dati. */
 export const LEGAL = {
+  /** Versione interna dell'informativa. Non va mostrata in UI. */
   privacyVersion: "3.2",
   effectiveDate: "12 ottobre 2026",
   /** Art. 12 GDPR — tempo massimo di risposta alle richieste dell'interessato. */
