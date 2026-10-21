@@ -58,14 +58,11 @@ export function SiteFooter() {
           </a>
         </nav>
         <p className="mt-4 text-caption text-brand-500">
-          Titolare del trattamento: {DATA_CONTROLLER.entity} ({DATA_CONTROLLER.legalRepresentative}
-          ) · P.IVA {OWNER.vat} ·{" "}
+          © {new Date().getFullYear()} · Titolare del trattamento: {DATA_CONTROLLER.entity}{" "}
+          ({DATA_CONTROLLER.legalRepresentative}) · P.IVA {OWNER.vat} ·{" "}
           <a href={`mailto:${DATA_CONTROLLER.email}`} className="link">
             {DATA_CONTROLLER.email}
           </a>
-        </p>
-        <p className="mt-1 text-caption text-brand-500">
-          © {new Date().getFullYear()} {OWNER.name}
         </p>
       </div>
     </footer>
