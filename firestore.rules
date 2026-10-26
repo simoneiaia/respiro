@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /assessments/{docId} {
+      allow read: if request.auth != null
+        && resource.data.user_id == request.auth.uid;
+      allow create: if request.auth != null
+        && request.resource.data.user_id == request.auth.uid
+        && request.resource.data.keys().hasAll([
+          'user_id', 'created_at', 'questionnaire_slug', 'questionnaire_version',
+          'total_raw_score', 'total_mean_score', 'band', 'risk_flag', 'area_scores'
+        ])
+        && (!('notes' in request.resource.data)
+          || request.resource.data.notes == null
+          || request.resource.data.notes.size() <= 2000);
+      allow update: if request.auth != null
+        && resource.data.user_id == request.auth.uid
+        && (!('notes' in request.resource.data)
+          || request.resource.data.notes == null
+          || request.resource.data.notes.size() <= 2000);
+      allow delete: if request.auth != null
+        && resource.data.user_id == request.auth.uid;
+    }
+
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow create, update: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasAll(['reminder_enabled', 'updated_at'])
+        && request.resource.data.reminder_enabled is bool;
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
