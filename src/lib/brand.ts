@@ -4,9 +4,10 @@ export const APP_NAME = "Respiro";
 export const APP_URL = "https://respiro-benessere.web.app";
 /** Repo pubblico GitHub (progetto open source). */
 export const GITHUB_REPO_URL = "https://github.com/simoneiaia/respiro";
-export const APP_TAGLINE = "Capire come stai, senza giudizio";
+export const LICENSE_URL = `${GITHUB_REPO_URL}/blob/main/LICENSE`;
+export const APP_TAGLINE = "Uno spazio per riflettere sul tuo benessere psicologico";
 export const APP_DESCRIPTION =
-  "Uno spazio tranquillo per riflettere sul tuo benessere. Orientativo, privato, non diagnostico. Non sostituisce uno psicologo, un medico o i servizi di emergenza.";
+  "Un questionario orientativo sul benessere psicologico negli ultimi 14 giorni. Senza account, privato, non diagnostico. Non sostituisce uno psicologo, un medico o i servizi di emergenza.";
 
 
 /**

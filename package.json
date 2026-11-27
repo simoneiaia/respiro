@@ -2,7 +2,7 @@
   "name": "respiro-benessere",
   "version": "0.2.0",
   "private": true,
-  "description": "respiro.web.app: self-check orientativo del benessere psicologico. Strumento non diagnostico.",
+  "description": "Respiro: self-check orientativo del benessere psicologico. Progetto open source con licenza MIT.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -35,5 +35,6 @@
   },
   "overrides": {
     "@grpc/grpc-js": "^1.14.0"
-  }
+  },
+  "license": "MIT"
 }

@@ -76,4 +76,8 @@ export interface AssessmentResult {
   saved_id?: string | null;
   /** Nota personale opzionale post-compilazione. */
   notes?: string;
+  /** Esito del salvataggio, solo nella sessione corrente. */
+  save_error?: string | null;
+  /** Impedisce di ritentare il salvataggio nell'account di un altro utente. */
+  save_user_id?: string;
 }

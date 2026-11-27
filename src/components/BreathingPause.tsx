@@ -24,31 +24,24 @@ export function BreathingPause() {
   useEffect(() => {
     if (!active || done) return;
 
-    const timer = window.setInterval(() => {
-      setSecondsLeft((s) => {
-        if (s > 1) return s - 1;
-
-        const nextStep = step + 1;
-        if (nextStep < CYCLE.length) {
-          setStep(nextStep);
-          return CYCLE[nextStep].seconds;
-        }
-
-        const nextRound = round + 1;
-        if (nextRound >= TOTAL_ROUNDS) {
-          setActive(false);
-          setDone(true);
-          return 0;
-        }
-
-        setRound(nextRound);
+    const timer = window.setTimeout(() => {
+      if (secondsLeft > 1) {
+        setSecondsLeft(secondsLeft - 1);
+      } else if (step + 1 < CYCLE.length) {
+        setStep(step + 1);
+        setSecondsLeft(CYCLE[step + 1].seconds);
+      } else if (round + 1 >= TOTAL_ROUNDS) {
+        setActive(false);
+        setDone(true);
+        setSecondsLeft(0);
+      } else {
+        setRound(round + 1);
         setStep(0);
-        return CYCLE[0].seconds;
-      });
+        setSecondsLeft(CYCLE[0].seconds);
+      }
     }, 1000);
-
-    return () => window.clearInterval(timer);
-  }, [active, done, round, step]);
+    return () => window.clearTimeout(timer);
+  }, [active, done, round, step, secondsLeft]);
 
   function start() {
     setDone(false);
@@ -120,6 +113,11 @@ export function BreathingPause() {
             </div>
           </div>
 
+          <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+            {active && !done
+              ? `${current.label} per ${current.seconds} secondi. Ciclo ${round + 1} di ${TOTAL_ROUNDS}.`
+              : done ? "Pausa completata." : "Pausa non attiva."}
+          </p>
           {active && !done && (
             <p className="text-caption text-brand-500">
               Ciclo {round + 1} di {TOTAL_ROUNDS}

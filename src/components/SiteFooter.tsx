@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { APP_NAME, GITHUB_REPO_URL, HELPLINES, OWNER } from "@/lib/brand";
+import { APP_NAME, GITHUB_REPO_URL, LICENSE_URL, HELPLINES, OWNER } from "@/lib/brand";
 import { DATA_CONTROLLER } from "@/lib/legal";
 import { GitHubMark } from "@/components/GitHubMark";
 
@@ -33,6 +33,12 @@ export function SiteFooter() {
             <span className="font-normal text-brand-600"> · codice su GitHub</span>
           </span>
         </a>
+        <p className="mb-4">
+          Codice aperto e riutilizzabile con{" "}
+          <a href={LICENSE_URL} className="link" target="_blank" rel="noopener noreferrer">
+            licenza MIT
+          </a>.
+        </p>
 
         <nav className="flex flex-wrap gap-x-5 gap-y-2" aria-label="Link legali">
           <Link href="/come-funziona" className="link">

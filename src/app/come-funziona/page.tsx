@@ -121,7 +121,8 @@ export default function ComeFunzionaPage() {
           <div className="mt-2 space-y-2 text-brand-700">
             <p>
               <strong>Anonimo:</strong> le risposte restano in memoria solo per la sessione corrente.
-              Non salviamo lo storico sul server.
+              Non salviamo lo storico sul server. Se esci dal questionario o ricarichi la pagina,
+              perdi i progressi. Scarica il report prima di chiudere il risultato.
             </p>
             <p>
               <strong>Con account:</strong> puoi salvare i punteggi aggregati (non le singole

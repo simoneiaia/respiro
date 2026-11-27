@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { ConsentPanel } from "@/components/ConsentPanel";
 import { useUser } from "@/lib/useUser";
-import { saveConsent, type ConsentState } from "@/lib/session";
+import { clearSession, saveConsent, type ConsentState } from "@/lib/session";
 import { enableReminder } from "@/lib/firebase/preferences";
 
 export default function ConsensoPage() {
@@ -12,6 +12,7 @@ export default function ConsensoPage() {
   const accountAvailable = configured && !!user;
 
   async function handleConfirm(consent: ConsentState) {
+    clearSession();
     saveConsent(consent);
     if (accountAvailable && consent.sixMonthReminder) {
       try {
