@@ -18,6 +18,7 @@ Correzioni sul ramo `fix/respiro-reliability-and-positioning`:
 TypeScript, 15 test e build completati. Percorso anonimo mobile collaudato con risposte sintetiche, compresi export TXT/PDF, note, revisione, segnale di rischio e cancellazione. Errori di salvataggio e note verificati con componenti reali e backend fittizio. Nessun dato di test inviato a Firestore.
 
 ## Prossimi passi
-- Controllo desktop completato. Registrare l’esito del deploy Hosting nel rapporto di verifica.
+- Frontend pubblicato su Firebase Hosting e percorso anonimo verificato anche online. PR #10 aperta come bozza, non unita a main.
+- Audit frontend di produzione: 0 vulnerabilità segnalate. Audit separato `functions/`: 17 vulnerabilità (1 critica, 5 alte, 11 moderate). Verificare le funzioni effettivamente distribuite e pianificare un aggiornamento dedicato con build/test; nessuna funzione è stata pubblicata in questa sessione.
 - Login Google, storico e cancellazione di un account reale richiedono un collaudo autenticato dedicato. Non sono stati usati account o dati reali in questa sessione.
 - Verificare operativamente la retention prima di dichiararla collaudata.
