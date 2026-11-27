@@ -37,7 +37,11 @@ I test usano solo dati sintetici e adapter fittizi. Verificano manifest Firebase
 - I log contengono solo conteggi, senza UID, indirizzi o messaggi del provider.
 - La chiave idempotente resta stabile per utente e scadenza. Non è una garanzia di invio esattamente una volta oltre la finestra di deduplicazione del provider; invio riuscito e aggiornamento Firestore non sono una transazione unica.
 
-## Eventuale attivazione
+## Decisione attuale: solo promemoria in app
+
+Il 27 novembre 2026 il proprietario ha confermato di mantenere solo i promemoria in app, senza attivare le email. Non abilitare servizi cloud né eseguire il deploy dello scheduler email. Il pacchetto corretto rimane nel repository come codice non attivato.
+
+## Eventuale attivazione futura
 
 Non eseguire il deploy come semplice conseguenza dell’audit. Prima servono una scelta esplicita sui promemoria email, verifica del consenso effettivo e dei testi pubblici, configurazione del mittente/Resend e dei segreti, regione, piano e costi. Queste verifiche non sono state sostituite dai test locali.
 
