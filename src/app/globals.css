@@ -98,8 +98,13 @@
 
 @layer utilities {
   @media print {
-    .no-print {
+    .no-print,
+    .result-screen {
       display: none !important;
+    }
+    .print-report {
+      display: block !important;
+      overflow-wrap: anywhere;
     }
     body {
       background: #ffffff;

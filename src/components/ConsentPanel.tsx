@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Disclaimer } from "./Disclaimer";
+import { questionnaire } from "@/lib/questionnaire";
 import { APP_NAME, MIN_AGE, TOOL_NATURE } from "@/lib/brand";
 import { REMINDER_INTERVAL_MONTHS } from "@/lib/reminders";
 import type { ConsentState } from "@/lib/session";
@@ -36,6 +37,15 @@ export function ConsentPanel({ accountAvailable, onConfirm }: ConsentPanelProps)
 
   return (
     <div className="space-y-5">
+      <div className="rounded-xl bg-accent-soft p-4 text-sm leading-relaxed text-brand-800">
+        <p>{questionnaire.questions.length} domande, circa 8–10 minuti, sugli ultimi 14 giorni.</p>
+        <p className="mt-2">
+          Le quattro aree riguardano benessere, sensazioni, vita quotidiana e segnali di rischio.
+          Alcune domande sono delicate, anche su pensieri di farti del male. Puoi interrompere
+          quando vuoi. Le risposte non vengono salvate durante la compilazione: se esci dal
+          questionario o ricarichi la pagina, dovrai ricominciare.
+        </p>
+      </div>
       <Disclaimer />
 
       <div className="card space-y-5">
@@ -144,7 +154,7 @@ export function ConsentPanel({ accountAvailable, onConfirm }: ConsentPanelProps)
           <section className="rounded-xl bg-accent-soft p-3 text-sm text-brand-700">
             <p className="font-medium text-brand-900">Modalità anonima</p>
             <p className="mt-1">
-              Le risposte restano in memoria solo per questa sessione. Per storico e promemoria
+              Le risposte restano solo nella memoria di questa sessione. Chiudendo o ricaricando la pagina le perdi. Per storico e promemoria
               in app,{" "}
               <Link href="/accedi" className="link">
                 crea un account gratuito

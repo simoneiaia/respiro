@@ -35,6 +35,7 @@ export function SiteHeader() {
             title="Open source su GitHub"
           >
             <GitHubMark size={18} />
+            <span className="hidden sm:inline">GitHub</span>
           </a>
           <Link href="/consenso" className="btn-ghost px-3 py-2">
             Self-check

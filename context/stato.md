@@ -2,23 +2,21 @@
 
 Ultimo aggiornamento: 2026-11-27
 
-## Dove siamo
-Il frontend Respiro è pubblicato su https://respiro-benessere.web.app. Le correzioni frontend del 27 novembre sono sul ramo `fix/respiro-reliability-and-positioning`, PR #10, non unita a main.
+## Progetto
+Respiro è un self-check orientativo per maggiorenni, non una scala clinica validata. Frontend Next.js 16 / React 19 con export statico su Firebase Hosting; Google Sign-In e storico facoltativo Firestore. App: https://respiro-benessere.web.app.
 
-Questa sessione lavora sul ramo separato `fix/cloud-functions-security`, basato su `origin/main`, per evitare di includere la PR frontend nell’aggiornamento del backend.
+## Integrazione PR #10 e #11
+Il proprietario ha autorizzato il merge di entrambe. I conflitti riguardano soltanto questi file di contesto e sono stati risolti mantenendo entrambe le serie di decisioni. Verifiche combinate in corso prima dei merge su main.
 
-## Cloud Functions
-- Nel repository c’è una sola funzione, `sendSixMonthReminders`: scheduler email giornaliero alle 09:00 Europe/Rome. Non è un job di retention né il promemoria in app del sito.
-- Service Usage restituisce `DISABLED` per Cloud Functions, Cloud Run e Cloud Scheduler. Gli inventari v1/v2/Run/Scheduler restituiscono 403 SERVICE_DISABLED; non costituiscono la prova di un inventario vuoto. Il tentativo Cloud Asset restituisce errore 500.
-- Nessuna API abilitata, nessuna funzione pubblicata, nessuna email inviata e nessun dato reale letto o cancellato.
-- Pacchetto aggiornato a Node 22, Firebase Admin 14.5.1 e Functions 7.4.0. Script retention adattato agli import modulari di Admin.
-- Log senza identificativi o errori del provider; gestione date/cooldown e isolamento dei fallimenti verificati.
-- Installazione pulita, build, 12 test e audit completo passati: zero vulnerabilità segnalate nel pacchetto functions.
-- Configurazione futura `firebase.functions.json` separata da Hosting, con test obbligatori prima del deploy.
+- PR #10: messaggio sul benessere psicologico, nome Respiro mantenuto, link GitHub/MIT; affidabilità risultato, note ed export; UX e accessibilità della compilazione e respirazione. Frontend già pubblicato e percorso anonimo verificato anche online.
+- PR #11: Node 22, Firebase Admin 14.5.1 e Functions 7.4.0; migrazione SDK anche nello script retention; log senza identificativi, test dei promemoria e dipendenze corrette. Audit functions passato a zero vulnerabilità.
 
-PR di questo intervento: https://github.com/simoneiaia/respiro/pull/11, aperta come bozza e non unita a main.
+## Email disattivate
+Decisione esplicita: solo promemoria in app. Non abilitare API, distribuire lo scheduler o configurare invii email. La sola funzione nel codice è uno scheduler email, non un job di retention. Service Usage ha restituito DISABLED per Functions, Run e Scheduler; gli inventari 403 SERVICE_DISABLED non certificano l’assenza di risorse storiche. La configurazione Functions resta separata da Hosting e non ci sono workflow GitHub nel repository che la distribuiscano al merge.
 
-## Decisione e seguito
-Il 27 novembre 2026 il proprietario ha confermato: mantenere solo i promemoria in app, senza attivare le email. Non abilitare API, distribuire lo scheduler o configurare invii email. Le correzioni di sicurezza restano nella PR #11; non richiedono un deploy cloud. Un’eventuale futura attivazione email richiederà una nuova indicazione esplicita.
+## Verifiche e limiti
+Frontend: 15 test, TypeScript, build e percorso anonimo collaudati. Functions: installazione pulita, build e 12 test sintetici, audit completo senza vulnerabilità. Nessuna email inviata e nessun dato reale letto o cancellato.
 
-Dettagli: `functions/README.md` e `docs/VERIFICA-FUNCTIONS-2026-11-27.md`.
+Restano fuori da questa chiusura il collaudo autenticato con account reale (login/storico/cancellazione) e la verifica operativa della retention. Non dichiararli verificati. Un’eventuale futura attivazione email richiede nuova indicazione esplicita.
+
+Rapporti: `docs/VERIFICA-2026-11-27.md`, `docs/VERIFICA-FUNCTIONS-2026-11-27.md`.

@@ -36,10 +36,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="it" className={`${outfit.variable} ${fraunces.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
+        <CookieBanner />
         <SiteHeader />
         <main className="hero-glow flex-1 py-8 sm:py-12">{children}</main>
         <SiteFooter />
-        <CookieBanner />
       </body>
     </html>
   );

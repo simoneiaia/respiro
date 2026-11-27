@@ -4,9 +4,11 @@ import {
   APP_NAME,
   APP_TAGLINE,
   GITHUB_REPO_URL,
+  LICENSE_URL,
   TOOL_NATURE,
   USER_FEARS,
 } from "@/lib/brand";
+import { questionnaire } from "@/lib/questionnaire";
 import { GitHubMark } from "@/components/GitHubMark";
 
 export default function HomePage() {
@@ -21,7 +23,7 @@ export default function HomePage() {
             alt=""
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-900/35 via-brand-900/45 to-[#f8fafc]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-900/60 via-brand-900/70 to-brand-900/90" />
           <div className="absolute inset-0 bg-gradient-to-r from-sky-900/20 via-transparent to-teal-900/25" />
 
           <div className="relative mx-auto flex min-h-[72vh] max-w-3xl flex-col justify-end px-5 pb-14 pt-24 sm:min-h-[78vh] sm:pb-16">
@@ -48,8 +50,9 @@ export default function HomePage() {
               {APP_TAGLINE}
             </h1>
             <p className="animate-rise mt-4 max-w-lg text-base leading-relaxed text-white/85">
-              Un momento privato per fermarti, rispondere con onestà e ricevere un quadro chiaro.
-              Non è una diagnosi: è un primo passo verso te stesso/a.
+              Un questionario orientativo di {questionnaire.questions.length} domande su come ti sei
+              sentito/a negli ultimi 14 giorni. Puoi usarlo senza account, senza giudizio.
+              Non fornisce diagnosi.
             </p>
             <div className="animate-rise mt-7 flex flex-wrap gap-3">
               <Link
@@ -66,7 +69,7 @@ export default function HomePage() {
               </a>
             </div>
             <p className="mt-4 text-sm text-white/70">
-              Circa 8–10 minuti · una domanda alla volta · puoi fermarti quando vuoi
+              Circa 8–10 minuti · una domanda alla volta · dai 18 anni
             </p>
           </div>
         </div>
@@ -193,7 +196,10 @@ export default function HomePage() {
             </h2>
             <p className="max-w-md text-sm leading-relaxed text-brand-700">
               {APP_NAME} è un progetto open source: puoi leggere il codice, segnalare problemi e
-              contribuire sul repository GitHub.
+              contribuire sul repository GitHub. Il codice è disponibile con{" "}
+              <a href={LICENSE_URL} className="link" target="_blank" rel="noopener noreferrer">
+                licenza MIT
+              </a>.
             </p>
           </div>
           <a
