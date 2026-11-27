@@ -16,7 +16,7 @@ Respiro offre un questionario originale (non una scala clinica validata) per rif
 
 ## Stack
 
-- Next.js 14 (static export)
+- Next.js 16 + React 19 (static export)
 - Firebase Auth + Firestore + Hosting
 - TypeScript, Tailwind CSS
 
@@ -48,4 +48,6 @@ Informativa in app (`/privacy`). Retention risultati e account inattivi: 24 mesi
 
 ## Licenza
 
-MIT. Vedi [LICENSE](./LICENSE).
+Codice open source con licenza MIT. Vedi [LICENSE](./LICENSE) e il [repository pubblico](https://github.com/simoneiaia/respiro).
+
+Le foto di stock hanno una licenza separata: vedi [crediti immagini](./public/images/ATTRIBUTION.md).

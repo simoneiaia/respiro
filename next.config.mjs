@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Export statico: compatibile con Cloudflare Pages senza runtime server.
-  // Tutto lo scoring e la persistenza avvengono lato client (Supabase JS).
+  // Export statico pubblicato su Firebase Hosting.
+  // Scoring nel browser; storico opzionale su Firestore.
   output: "export",
   trailingSlash: true,
   images: {

@@ -34,8 +34,8 @@ export function CookieBanner() {
 
   return (
     <div
-      className="no-print fixed inset-x-0 bottom-0 z-40 border-t border-brand-100 bg-white/95 p-4 shadow-soft backdrop-blur-md"
-      role="dialog"
+      className="no-print border-b border-brand-100 bg-white p-4"
+      role="region"
       aria-label="Informativa cookie"
     >
       <div className="container-app flex max-w-3xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

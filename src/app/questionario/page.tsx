@@ -1,19 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { QuestionCard } from "@/components/QuestionCard";
 import { ProgressBar } from "@/components/ProgressBar";
 import { questionnaire } from "@/lib/questionnaire";
-import { missingRequired, scoreAssessment } from "@/lib/scoring";
+import { missingRequired, scoreAssessment, detectRisk } from "@/lib/scoring";
 import type { Answers } from "@/lib/types";
 import {
   getConsent,
   hasValidConsent,
   saveResult,
+  clearSession,
 } from "@/lib/session";
 import { useUser } from "@/lib/useUser";
 import { saveAssessment } from "@/lib/firebase/assessments";
+import { SafetyAlert } from "@/components/SafetyAlert";
+import { persistResult } from "@/lib/save-result";
 import { enableReminder } from "@/lib/firebase/preferences";
 
 const questions = questionnaire.questions;
@@ -27,7 +30,27 @@ export default function QuestionarioPage() {
   const [answers, setAnswers] = useState<Answers>({});
   const [step, setStep] = useState(0);
   const [saving, setSaving] = useState(false);
-  const [saveError, setSaveError] = useState<string | null>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const [reviewingAnswer, setReviewingAnswer] = useState(false);
+
+  useEffect(() => {
+    if (ready) headingRef.current?.focus();
+  }, [ready, step]);
+
+  useEffect(() => {
+    if (Object.keys(answers).length === 0 || saving) return;
+    const warn = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [answers, saving]);
+
+  function interrupt() {
+    clearSession();
+    router.push("/");
+  }
 
   useEffect(() => {
     if (!hasValidConsent()) {
@@ -49,34 +72,23 @@ export default function QuestionarioPage() {
       return;
     }
 
-    const result = scoreAssessment(questionnaire, answers);
-    saveResult(result);
-
     const consent = getConsent();
-    const wantsSave = consent?.saveHistory && user;
-    if (wantsSave) {
+    let result = scoreAssessment(questionnaire, answers);
+    if (consent?.saveHistory && user) {
       setSaving(true);
-      setSaveError(null);
-      try {
-        const id = await saveAssessment(result);
-        saveResult({ ...result, saved_id: id });
-        if (consent?.sixMonthReminder) {
-          try {
-            await enableReminder();
-          } catch {
-            /* promemoria opzionale */
-          }
+      result = await persistResult({ ...result, save_user_id: user.uid }, saveAssessment);
+      if (result.saved_id && consent.sixMonthReminder) {
+        try {
+          await enableReminder();
+        } catch {
+          /* Il promemoria è gestibile anche dalla dashboard. */
         }
-      } catch (e) {
-        setSaveError(
-          e instanceof Error ? e.message : "Risultato calcolato, ma non salvato sul server.",
-        );
-        setSaving(false);
-        router.push("/risultato");
-        return;
       }
       setSaving(false);
+    } else if (consent?.saveHistory) {
+      result = { ...result, save_error: "Accesso scaduto: risultato non salvato. Scarica il report prima di chiudere la pagina." };
     }
+    saveResult(result);
     router.push("/risultato");
   }
 
@@ -96,7 +108,18 @@ export default function QuestionarioPage() {
   return (
     <div className="container-app pb-28 sm:pb-8">
       <div className="space-y-6">
+        <h1 ref={headingRef} tabIndex={-1} className="text-xl font-semibold">
+          {onReview ? "Rivedi le tue risposte" : `Domanda ${step + 1} di ${total}`}
+        </h1>
         <ProgressBar current={onReview ? total : step + 1} total={total} />
+        <p className="text-sm text-brand-600">
+          {onReview ? "Controlla le risposte prima di continuare." :
+            questionnaire.areas.find((area) => area.key === currentQuestion?.area)?.label}
+          {" · "}Se esci dal questionario o ricarichi la pagina, perdi i progressi.
+        </p>
+        {detectRisk(questionnaire, answers).risk_flag && (
+          <SafetyAlert onInterrupt={interrupt} />
+        )}
 
         {!onReview && step === 0 && (
           <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm text-brand-700">
@@ -137,7 +160,7 @@ export default function QuestionarioPage() {
                         </p>
                       </div>
                       <button
-                        onClick={() => setStep(i)}
+                        onClick={() => { setReviewingAnswer(true); setStep(i); }}
                         className="btn-ghost shrink-0 px-3 py-1.5 text-xs"
                       >
                         Modifica
@@ -147,10 +170,6 @@ export default function QuestionarioPage() {
                 })}
               </ul>
             </div>
-
-            {saveError && (
-              <p className="rounded-xl bg-[#fdf1ee] p-3 text-sm text-danger">{saveError}</p>
-            )}
           </div>
         )}
       </div>
@@ -167,7 +186,15 @@ export default function QuestionarioPage() {
               >
                 Indietro
               </button>
-              {step < total - 1 ? (
+              {reviewingAnswer ? (
+                <button
+                  onClick={() => { setReviewingAnswer(false); setStep(total); }}
+                  disabled={currentValue === undefined}
+                  className="btn-primary min-h-[2.75rem] flex-1 sm:flex-none sm:px-8"
+                >
+                  Torna alla revisione
+                </button>
+              ) : step < total - 1 ? (
                 <button
                   onClick={() => setStep((s) => s + 1)}
                   disabled={currentValue === undefined}
