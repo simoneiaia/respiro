@@ -44,7 +44,11 @@ I test includono: manifest dello scheduler e import senza lettura di segreti; co
 
 Nessuna email inviata, nessun test su destinatari reali, nessuna query a documenti utente e nessuna esecuzione del purge di retention. I test sono locali e non certificano un’integrazione con Resend/Firestore distribuita.
 
-PR: https://github.com/simoneiaia/respiro/pull/11, bozza non unita a main.
+PR: https://github.com/simoneiaia/respiro/pull/11, unita a main insieme alla PR #10 su richiesta del proprietario.
+
+## Chiusura integrazione
+
+Merge #10 e #11 completati. Verifiche sul risultato combinato passate: TypeScript e build frontend, 15 test frontend, build e 12 test Functions, controllo sintattico retention e audit (frontend di produzione, Functions completo) a zero vulnerabilità. Il contenuto di main coincide con quello testato. Dopo i merge Service Usage conferma ancora DISABLED per Functions, Run e Scheduler.
 
 ## Pubblicazione
 
