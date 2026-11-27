@@ -1,21 +1,17 @@
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import { defineSecret } from "firebase-functions/params";
-import * as admin from "firebase-admin";
+import { getApps, initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+import { logger } from "firebase-functions";
+import { processReminders } from "./reminders";
 import { Resend } from "resend";
 
-admin.initializeApp();
+if (getApps().length === 0) initializeApp();
 
 const resendApiKey = defineSecret("RESEND_API_KEY");
 const reminderFromEmail = defineSecret("REMINDER_FROM_EMAIL");
 
 const APP_URL = "https://respiro-benessere.web.app";
-const REMINDER_MONTHS = 6;
-
-function addMonths(iso: string, months: number): Date {
-  const d = new Date(iso);
-  d.setMonth(d.getMonth() + months);
-  return d;
-}
 
 function buildEmailHtml(): string {
   return `
@@ -47,59 +43,33 @@ export const sendSixMonthReminders = onSchedule(
     secrets: [resendApiKey, reminderFromEmail],
   },
   async () => {
-    const db = admin.firestore();
+    const db = getFirestore();
     const resend = new Resend(resendApiKey.value());
     const from = reminderFromEmail.value();
-
-    const usersSnap = await db
-      .collection("users")
-      .where("reminder_email_enabled", "==", true)
-      .get();
-
-    for (const userDoc of usersSnap.docs) {
-      const uid = userDoc.id;
-      const prefs = userDoc.data();
-      const email = prefs.email as string | undefined;
-      if (!email) continue;
-
-      const lastSent = prefs.last_reminder_email_sent_at as string | undefined;
-      if (lastSent) {
-        const daysSince =
-          (Date.now() - new Date(lastSent).getTime()) / (1000 * 60 * 60 * 24);
-        if (daysSince < 14) continue;
-      }
-
-      const assessmentsSnap = await db
-        .collection("assessments")
-        .where("user_id", "==", uid)
-        .orderBy("created_at", "desc")
-        .limit(1)
-        .get();
-
-      if (assessmentsSnap.empty) continue;
-
-      const lastAt = assessmentsSnap.docs[0].data().created_at as string;
-      const dueDate = addMonths(lastAt, REMINDER_MONTHS);
-      if (new Date() < dueDate) continue;
-
-      const dueKey = dueDate.toISOString().slice(0, 10);
-      const { error } = await resend.emails.send(
-        {
-          from,
-          to: [email],
+    const summary = await processReminders({
+      async listUsers() {
+        const snapshot = await db.collection("users")
+          .where("reminder_email_enabled", "==", true).get();
+        return snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      },
+      async latestAssessment(uid) {
+        const snapshot = await db.collection("assessments")
+          .where("user_id", "==", uid).orderBy("created_at", "desc").limit(1).get();
+        return snapshot.empty ? null : snapshot.docs[0].data().created_at;
+      },
+      async send(email, idempotencyKey) {
+        const { error } = await resend.emails.send({
+          from, to: [email],
           subject: "Respiro: è un buon momento per un nuovo self-check",
           html: buildEmailHtml(),
-        },
-        { idempotencyKey: `respiro-reminder/${uid}/${dueKey}` },
-      );
-
-      if (!error) {
-        await userDoc.ref.update({
-          last_reminder_email_sent_at: new Date().toISOString(),
-        });
-      } else {
-        console.error(`Reminder failed for ${uid}:`, error.message);
-      }
-    }
+        }, { idempotencyKey });
+        return !error;
+      },
+      async markSent(uid, iso) {
+        await db.collection("users").doc(uid).update({ last_reminder_email_sent_at: iso });
+      },
+    });
+    // Solo conteggi: nessun identificativo utente o messaggio del provider nei log.
+    logger.info("Reminder batch completed", summary);
   },
 );

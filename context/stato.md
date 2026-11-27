@@ -2,23 +2,21 @@
 
 Ultimo aggiornamento: 2026-11-27
 
-## Dove siamo
-Respiro è un self-check orientativo per maggiorenni, non una scala clinica validata. Frontend Next.js 16 / React 19 con export statico su Firebase Hosting; autenticazione Google con Firebase Auth e storico facoltativo su Firestore. I moduli Supabase e alcuni documenti iniziali descrivono un percorso precedente.
+## Progetto
+Respiro è un self-check orientativo per maggiorenni, non una scala clinica validata. Frontend Next.js 16 / React 19 con export statico su Firebase Hosting; Google Sign-In e storico facoltativo Firestore. App: https://respiro-benessere.web.app.
 
-Correzioni sul ramo `fix/respiro-reliability-and-positioning`:
-- errore di salvataggio conservato nel risultato con recupero manuale nello stesso account;
-- note sincronizzate con report, eliminabili e aggiornate solo dopo conferma del salvataggio;
-- gestione errore appunti, TXT e stampa del report aggiornato;
-- avviso sui segnali di rischio durante la compilazione e ritorno diretto alla revisione;
-- istruzioni accessibili della pausa guidata e gestione dei cicli senza aggiornamenti di stato annidati;
-- chiarimenti su perdita progressi, contrasto della homepage e avviso cookie senza sovrapposizioni;
-- messaggio iniziale sul benessere psicologico, nome Respiro mantenuto, link GitHub/MIT espliciti.
+## Integrazione PR #10 e #11
+Il proprietario ha autorizzato il merge di entrambe. I conflitti riguardano soltanto questi file di contesto e sono stati risolti mantenendo entrambe le serie di decisioni. Verifiche combinate in corso prima dei merge su main.
 
-## Verifiche
-TypeScript, 15 test e build completati. Percorso anonimo mobile collaudato con risposte sintetiche, compresi export TXT/PDF, note, revisione, segnale di rischio e cancellazione. Errori di salvataggio e note verificati con componenti reali e backend fittizio. Nessun dato di test inviato a Firestore.
+- PR #10: messaggio sul benessere psicologico, nome Respiro mantenuto, link GitHub/MIT; affidabilità risultato, note ed export; UX e accessibilità della compilazione e respirazione. Frontend già pubblicato e percorso anonimo verificato anche online.
+- PR #11: Node 22, Firebase Admin 14.5.1 e Functions 7.4.0; migrazione SDK anche nello script retention; log senza identificativi, test dei promemoria e dipendenze corrette. Audit functions passato a zero vulnerabilità.
 
-## Prossimi passi
-- Frontend pubblicato su Firebase Hosting e percorso anonimo verificato anche online. PR #10 aperta come bozza, non unita a main.
-- Audit frontend di produzione: 0 vulnerabilità segnalate. Audit separato `functions/`: 17 vulnerabilità (1 critica, 5 alte, 11 moderate). Verificare le funzioni effettivamente distribuite e pianificare un aggiornamento dedicato con build/test; nessuna funzione è stata pubblicata in questa sessione.
-- Login Google, storico e cancellazione di un account reale richiedono un collaudo autenticato dedicato. Non sono stati usati account o dati reali in questa sessione.
-- Verificare operativamente la retention prima di dichiararla collaudata.
+## Email disattivate
+Decisione esplicita: solo promemoria in app. Non abilitare API, distribuire lo scheduler o configurare invii email. La sola funzione nel codice è uno scheduler email, non un job di retention. Service Usage ha restituito DISABLED per Functions, Run e Scheduler; gli inventari 403 SERVICE_DISABLED non certificano l’assenza di risorse storiche. La configurazione Functions resta separata da Hosting e non ci sono workflow GitHub nel repository che la distribuiscano al merge.
+
+## Verifiche e limiti
+Frontend: 15 test, TypeScript, build e percorso anonimo collaudati. Functions: installazione pulita, build e 12 test sintetici, audit completo senza vulnerabilità. Nessuna email inviata e nessun dato reale letto o cancellato.
+
+Restano fuori da questa chiusura il collaudo autenticato con account reale (login/storico/cancellazione) e la verifica operativa della retention. Non dichiararli verificati. Un’eventuale futura attivazione email richiede nuova indicazione esplicita.
+
+Rapporti: `docs/VERIFICA-2026-11-27.md`, `docs/VERIFICA-FUNCTIONS-2026-11-27.md`.

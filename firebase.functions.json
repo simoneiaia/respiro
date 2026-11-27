@@ -1,0 +1,20 @@
+{
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "respiro-reminders",
+      "runtime": "nodejs22",
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" test"
+      ],
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local",
+        "test/**"
+      ]
+    }
+  ]
+}

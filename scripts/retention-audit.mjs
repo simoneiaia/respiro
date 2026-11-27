@@ -24,7 +24,6 @@ import { dirname, join } from "path";
 import { homedir } from "os";
 import { fileURLToPath } from "url";
 
-const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 
@@ -216,14 +215,12 @@ async function runWithRest(accessToken) {
 }
 
 async function runWithAdmin() {
-  let admin;
-  try {
-    admin = require(join(ROOT, "functions/node_modules/firebase-admin"));
-  } catch {
-    admin = require("firebase-admin");
-  }
-  if (!admin.apps.length) admin.initializeApp({ projectId: PROJECT_ID });
-  const db = admin.firestore();
+  const functionsRequire = createRequire(join(ROOT, "functions/package.json"));
+  const { getApps, initializeApp } = functionsRequire("firebase-admin/app");
+  const { getFirestore } = functionsRequire("firebase-admin/firestore");
+  const { getAuth } = functionsRequire("firebase-admin/auth");
+  if (!getApps().length) initializeApp({ projectId: PROJECT_ID });
+  const db = getFirestore();
   const cutoffAssessments = monthsAgo(ASSESSMENT_MONTHS);
   const cutoffInactivity = monthsAgo(INACTIVITY_MONTHS);
 
@@ -313,7 +310,7 @@ async function runWithAdmin() {
       await db.collection("users").doc(user.id).delete();
       report.actions_taken.push({ type: "deleted_user_doc", id: user.id });
       try {
-        await admin.auth().deleteUser(user.id);
+        await getAuth().deleteUser(user.id);
         report.actions_taken.push({ type: "deleted_auth_user", id: user.id });
       } catch (e) {
         report.actions_taken.push({
