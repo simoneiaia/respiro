@@ -16,6 +16,8 @@ Questa sessione lavora sul ramo separato `fix/cloud-functions-security`, basato 
 - Installazione pulita, build, 12 test e audit completo passati: zero vulnerabilità segnalate nel pacchetto functions.
 - Configurazione futura `firebase.functions.json` separata da Hosting, con test obbligatori prima del deploy.
 
+PR di questo intervento: https://github.com/simoneiaia/respiro/pull/11, aperta come bozza e non unita a main.
+
 ## Prossimo passo
 È stata chiesta la scelta tra mantenere i soli promemoria in app e preparare anche i promemoria email. In attesa della scelta non si abilita o distribuisce lo scheduler email. Un’eventuale attivazione richiede verifica di consenso, configurazione, regione e costi, seguita da un nuovo inventario prima del deploy.
 

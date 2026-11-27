@@ -44,6 +44,8 @@ I test includono: manifest dello scheduler e import senza lettura di segreti; co
 
 Nessuna email inviata, nessun test su destinatari reali, nessuna query a documenti utente e nessuna esecuzione del purge di retention. I test sono locali e non certificano un’integrazione con Resend/Firestore distribuita.
 
+PR: https://github.com/simoneiaia/respiro/pull/11, bozza non unita a main.
+
 ## Pubblicazione
 
 Nessun deploy cloud eseguito. Con le tre API disabilitate, distribuire il codice significherebbe attivare un servizio email, non aggiornare una funzione attiva identificata. È stata richiesta la scelta tra mantenere i soli promemoria in app e preparare anche le email. Un’eventuale attivazione richiede verifica dedicata di consenso, testi, segreti, mittente, regione, piano e costi; ripetere l’inventario dopo l’abilitazione autorizzata e prima del deploy.
